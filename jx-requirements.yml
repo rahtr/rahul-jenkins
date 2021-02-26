@@ -20,7 +20,7 @@ spec:
   - key: staging
   - key: production
   ingress:
-    domain: ""
+    domain: "apps.kragon9611.cp.fyre.ibm.com"
     externalDNS: false
     namespaceSubDomain: -jx.
     tls:

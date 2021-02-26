@@ -1,0 +1,51 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    branch-protection:
+      protect-tested-repos: true
+    github:
+      LinkURL: null
+    in_repo_config:
+      enabled:
+        ratripathi/rahul-jenkins: true
+    plank: {}
+    pod_namespace: jx
+    prowjob_namespace: jx
+    push_gateway:
+      serve_metrics: false
+    tide:
+      context_options:
+        from-branch-protection: true
+        required-if-present-contexts: null
+        skip-unknown-contexts: false
+      merge_method:
+        ratripathi/rahul-jenkins: merge
+      queries:
+      - labels:
+        - approved
+        missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - ratripathi/rahul-jenkins
+      - labels:
+        - updatebot
+        missingLabels:
+        - do-not-merge
+        - do-not-merge/hold
+        - do-not-merge/work-in-progress
+        - needs-ok-to-test
+        - needs-rebase
+        repos:
+        - ratripathi/rahul-jenkins
+      target_url: http://dashboard-jx.apps.kragon9611.cp.fyre.ibm.com
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: config
+  namespace: jx
+  labels:
+    gitops.jenkins-x.io/pipeline: 'namespaces'
